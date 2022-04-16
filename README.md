@@ -1,4 +1,4 @@
-# alkemy_fullstack_challenge_proyect
+# alkemy fullstack challenge
 An application to carry the personal budget: income and expenses. With user accounts and API.
 
 
