@@ -1,0 +1,68 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator dbml {
+  provider = "prisma-dbml-generator"
+}
+
+// --------------------------------------------------------------------------
+//                                   Tables
+// --------------------------------------------------------------------------
+
+model Users {
+  id       Int    @id @default(autoincrement())
+  uid      String @unique
+  name     String
+  lastname String
+
+  OperationsHistory OperationsHistory[]
+  Categories        Categories[]
+}
+
+model Categories {
+  id          Int     @id @unique @default(autoincrement())
+  name        String
+  description String?
+
+  Users  Users @relation(fields: [userId], references: [id])
+  userId Int
+
+  OperationsHistory OperationsHistory[]
+}
+
+model OperationsHistory {
+  id          Int      @id @unique @default(autoincrement())
+  type        Int
+  amount      Float
+  date        DateTime
+  description String?
+  userUid     String
+
+  Users      Users       @relation(fields: [userId], references: [id])
+  userId     Int
+  Categories Categories? @relation(fields: [categoryId], references: [id])
+  categoryId Int?
+}
+
+// --------------------------------------------------------------------------
+//                                Quick documentation
+// --------------------------------------------------------------------------
+
+// Create new migration history and update the database:
+// npx prisma migrate dev --name the_name_change_you_want_to_make
+
+// npx prisma migrate reset
+
+// npx prisma migrate deploy
+
+// Create the sql database explain, to generate the diagram in dbdiagram.io:
+// npx prisma generate

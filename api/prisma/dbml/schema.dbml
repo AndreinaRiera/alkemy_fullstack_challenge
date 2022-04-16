@@ -1,0 +1,40 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table Users {
+  id Int [pk, increment]
+  uid String [unique, not null]
+  name String [not null]
+  lastname String [not null]
+  OperationsHistory OperationsHistory [not null]
+  Categories Categories [not null]
+}
+
+Table Categories {
+  id Int [pk, increment, unique]
+  name String [not null]
+  description String
+  Users Users [not null]
+  userId Int [not null]
+  OperationsHistory OperationsHistory [not null]
+}
+
+Table OperationsHistory {
+  id Int [pk, increment, unique]
+  type Int [not null]
+  amount Float [not null]
+  date DateTime [not null]
+  description String
+  userUid String [not null]
+  Users Users [not null]
+  userId Int [not null]
+  Categories Categories
+  categoryId Int
+}
+
+Ref: Categories.userId > Users.id
+
+Ref: OperationsHistory.userId > Users.id
+
+Ref: OperationsHistory.categoryId > Categories.id

@@ -1,0 +1,68 @@
+@use "sass:map";
+@import 'variables';
+
+@mixin media-custom ($min-breackpoint, $max-breackpoint: false) {
+
+    @if $max-breackpoint {
+        @if $min-breackpoint {
+            @media screen and (min-width: map.get($grid-breakpoints, $min-breackpoint)) and (max-width: map.get($grid-breakpoints, $max-breackpoint)) {
+                @content;
+            }
+        }
+
+        @else {
+            @media screen and (max-width: map.get($grid-breakpoints, $max-breackpoint)) {
+                @content;
+            }
+        }
+    }
+
+    @else {
+        @media screen and (min-width: map.get($grid-breakpoints, $min-breackpoint)) {
+            @content;
+        }
+    }
+}
+
+
+@mixin media-max ($breackpoint) {
+    @include media-custom(false, $breackpoint) {
+        @content;
+    }
+}
+
+@mixin media-min ($breackpoint) {
+    @include media-custom($breackpoint) {
+        @content;
+    }
+}
+
+@mixin media-sm () {
+    @include media-custom("sm", "md") {
+        @content;
+    }
+}
+
+@mixin media-md () {
+    @include media-custom("md", "lg") {
+        @content;
+    }
+}
+
+@mixin media-lg () {
+    @include media-custom("lg", "xl") {
+        @content;
+    }
+}
+
+@mixin media-xl () {
+    @include media-custom("xl", "xxl") {
+        @content;
+    }
+}
+
+@mixin media-xxl () {
+    @include media-custom("xxl") {
+        @content;
+    }
+}
