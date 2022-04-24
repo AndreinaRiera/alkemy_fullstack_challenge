@@ -27,7 +27,7 @@ Thanks for your time!
 
 ____________________________________________________________________________________________
 
-Atributions:
+Atributions: 
 
 Icon: Commerce and shopping icons created by Freepik - Flaticon    https://www.flaticon.com/free-icons/commerce-and-shopping
 
